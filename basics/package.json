@@ -1,0 +1,15 @@
+{
+  "name": "demo",
+  "version": "0.1.24.1",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "jest-style-matchers": "^0.1.3"
+  }
+}
