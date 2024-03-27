@@ -1,0 +1,28 @@
+body {
+  background-color: #f0f0f0;
+}
+
+h1 {
+  font-family: 'Helvetica';
+  color: white;
+  background-color: rebeccapurple; /*dark gray*/
+  padding: 1em 0;
+}
+
+h2 {
+  color: gold;
+}
+
+p {
+  font-family: 'Papyrus';
+}
+
+img {
+  max-width: 200px;
+  background-color: yellow;
+  border-radius: 20px;
+}
+
+.textbook {
+ background-color: yellow; 
+}
