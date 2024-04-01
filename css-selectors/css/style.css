@@ -6,8 +6,8 @@ header {
   margin-bottom: 1em;
 }
 
-h2 {
-  color: rebeccapurple;
+.about-section section p {
+  background-color: lightgreen;
 }
 
 p {
@@ -25,3 +25,16 @@ img {
   background-color: #eee;
   padding: .25em .5em;
 }
+
+a:visited {
+  color: blue;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+img:hover {
+  max-height: 300px;
+}
+

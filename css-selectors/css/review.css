@@ -36,7 +36,7 @@
 /* .first.second { color: green}; */
 /* div > p { color: green; } */
 /* div .second, #first { color: green; } */
-/* p:last-child { color: green; }  */
+/* p:nth-child(3n) { color: green; }  */
 
 
 
@@ -66,8 +66,9 @@
 
 
 /* Q3 */
-/* p { color: grey; }
-#red { color: red; }
+.blue { color: grey; }
+.red { color: cyan; }
+/* #red { color: red; }
 .blue { color: blue; }
 #red .blue { color: magenta; }
 .green p { color: lightgreen; }
