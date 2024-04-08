@@ -2,9 +2,19 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  background-color: azure;
+}
+
 /* general styling */
 h1, h2, h3 {
   font-family: 'Montserrat', 'Helvetica', sans-serif;
+}
+
+h1 {
+  font-size: xx-large;
+  color: darkgoldenrod;
 }
 
 h2 {
@@ -15,6 +25,7 @@ h2 {
 nav {
   color: white;
   background-color: #4b2e83;
+  padding: .5rem;
 }
 
 nav ul {
@@ -33,7 +44,8 @@ nav a {
 
 /* main content (columns) */
 main {
-  display: flex;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 /* about section */
@@ -41,24 +53,29 @@ main {
   background-color: #f8f8f8;
   margin-left: 1.5em;
   flex-basis: 30%;
-  order: 2;
+  /* order: 2; */
 }
 
 .about-section img {
   max-width: 150px;
 }
 
-
 /* topics cards */
 .card-box {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-around; */
 }
 
 .topics-section .card {
   border: 1px solid black;
   flex-grow: 1;
+  text-align: center; /*for the h3 */
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .topics-section img {
@@ -68,4 +85,38 @@ main {
 /* other */
 footer {
   font-size: smaller;
+}
+
+/* rules apply to screens > 568px wide */
+/* 568, 768, 992, 1200, 1400 */
+@media (min-width: 568px) {
+
+  body {
+    background-color: lightpink;
+  }
+
+  .card {
+    background-color: white;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    background-color: aquamarine;
+  }
+
+  .card-box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    flex-basis: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .card {
+    flex-basis: 33%;
+  }
 }
