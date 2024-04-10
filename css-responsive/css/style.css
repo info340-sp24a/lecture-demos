@@ -44,8 +44,7 @@ nav a {
 
 /* main content (columns) */
 main {
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
 }
 
 /* about section */
@@ -53,7 +52,6 @@ main {
   background-color: #f8f8f8;
   margin-left: 1.5em;
   flex-basis: 30%;
-  /* order: 2; */
 }
 
 .about-section img {
@@ -62,9 +60,9 @@ main {
 
 /* topics cards */
 .card-box {
-  /* display: flex;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; */
+  justify-content: space-around;
 }
 
 .topics-section .card {
@@ -89,7 +87,7 @@ footer {
 
 /* rules apply to screens > 568px wide */
 /* 568, 768, 992, 1200, 1400 */
-@media (min-width: 568px) {
+/* @media (min-width: 568px) {
 
   body {
     background-color: lightpink;
@@ -119,4 +117,4 @@ footer {
   .card {
     flex-basis: 33%;
   }
-}
+} */
