@@ -27,6 +27,18 @@ main {
   display: flex;
 }
 
+nav ul {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+}
+
+nav ul li {
+  display: inline;
+  /* border: 2px solid cyan; */
+  padding: 1em;
+}
+
 /* about section */
 /* the first child of the flexbox */
 .about-section {
