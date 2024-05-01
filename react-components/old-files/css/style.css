@@ -1,0 +1,11 @@
+header {
+  background-color: rebeccapurple;
+}
+
+.about-section img {
+  max-width: 200px;
+}
+
+.topics-section img {
+  max-width: 150px;
+}
