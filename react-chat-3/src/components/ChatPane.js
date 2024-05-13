@@ -5,12 +5,21 @@ import { ComposeForm } from './ComposeForm.js';
 import INITIAL_CHAT_LOG from '../data/chat_log.json'
 
 export function ChatPane(props) {
-  const { currentChannel } = props;
+  console.log("rendering ChatPane");
+  const { currentChannel, currentUser } = props;
 
   const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG); 
+  console.log(msgStateArray);
+
+  // //goood: compute based on state
+  // const numMsgs = msgStateArray.length;
+  // //bad
+  // const [numMsg, setNumMsg] = useState(INITIAL_CHAT_LOG.length)
+
 
   //STATE MANAGEMENT: how do we change
   const addMessage = function(userObj, messageText, channel) {
+    console.log(userObj);
     const newMessage = {
       "userId": userObj.userId,
       "userName": userObj.userName,
@@ -19,6 +28,8 @@ export function ChatPane(props) {
       "timestamp": Date.now(),
       "channel": channel
     }
+    console.log("new message", newMessage);
+
     const newArray = [...msgStateArray, newMessage];
     setMsgStateArray(newArray); //update the board & re-render
   }
@@ -54,7 +65,7 @@ export function ChatPane(props) {
           {messageItemArray}
         </div>
 
-        <ComposeForm currentChannel={currentChannel} addMessageFunction={addMessage} />
+        <ComposeForm currentChannel={currentChannel} addMessageFunction={addMessage} currentUser={currentUser} />
     </>
   )
 }

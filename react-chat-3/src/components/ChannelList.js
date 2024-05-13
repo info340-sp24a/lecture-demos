@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 export function ChannelList(props) {
-  const {channelNames, currentChannel} = props;
-
+  const {channelNames, currentChannel, changeChannelFunction} = props;
   
   const handleClick = (event) => {
     event.preventDefault();
     const linkName = event.target.name;
     console.log("Clicked on", linkName);
+    changeChannelFunction(linkName);
   }
 
   const liArray = channelNames.map((channelNameString) => {

@@ -69,3 +69,7 @@ header button.user-icon {
 textarea.form-control {
   resize: none;
 }
+
+.input-group img {
+  max-width:75px;
+}
