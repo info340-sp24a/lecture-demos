@@ -10,7 +10,7 @@ export function ChannelList(props) {
       <div key={channelNameString}>
         <a className="px-2"
           name={channelNameString}
-          href={"/"+channelNameString}
+          href={"/chat/"+channelNameString}
         >
           {channelNameString}
         </a>
