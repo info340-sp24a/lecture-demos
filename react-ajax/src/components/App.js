@@ -9,9 +9,41 @@ const EXAMPLE_DATA = [
 
 
 function App(props) {
+  const { initialSearch } = props;
   const [stateData, setStateData] = useState(EXAMPLE_DATA);
   //control form
-  const [queryInput, setQueryInput] = useState('');
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [queryInput, setQueryInput] = useState('bootstrap');
+
+  useEffect(() => {
+    console.log("running effect hook");
+    //do stuff with side effect
+    const URL = "https://api.github.com/search/repositories"+"?q="+initialSearch;
+    fetch(URL)
+    .then((response) => {
+      const encodingBuzzer = response.json(); //encodes the body
+      return encodingBuzzer;
+    })
+    .then((data) => {
+      const repoArray = data.items;
+      setStateData(repoArray);
+  
+      //NOW I have the data I wanted
+    })
+    .catch((err) => {
+      setErrorMessage('error');
+    })
+
+  
+
+  }, [])
+
+
+
+
+
 
   const handleChange = (event) => {
     setQueryInput(event.target.value);
@@ -21,6 +53,28 @@ function App(props) {
     event.preventDefault();
 
     //do something with form input!
+
+    const URL = "https://api.github.com/search/repositories"+"?q="+queryInput;
+
+    console.log("about to request")
+
+    fetch(URL)
+      .then((response) => {
+        const encodingBuzzer = response.json(); //encodes the body
+        return encodingBuzzer;
+      })
+      .then((data) => {
+        console.log(data);
+        const repoArray = data.items;
+        setStateData(repoArray);
+
+        //NOW I have the data I wanted
+      })
+
+    // const response = await fetch(URL);
+    // const data = await response.json();
+    // console.log(data);
+
 
   }
 
@@ -36,7 +90,9 @@ function App(props) {
     <div className="container">
       <header><h1>AJAX Demo</h1></header> 
 
-      <form method="GET" action="https://api.github.com/search/repositories">
+      <p>{errorMessage}</p>
+
+      <form method="GET" action="https://api.github.com/search/repositories" onSubmit={handleSubmit}> 
         <input type="text" className="form-control mb-2" 
           name="q"
           placeholder="Search Github for..."
