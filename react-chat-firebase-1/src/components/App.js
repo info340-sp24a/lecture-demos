@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
+import { getDatabase, ref, set as firebaseSet, push as firebasePush, onValue } from 'firebase/database';
+
 import { Routes, Route, Outlet, Navigate, useNavigate } from 'react-router-dom';
 
 import { HeaderBar } from './HeaderBar.js';
@@ -12,10 +14,36 @@ import INITIAL_CHAT_LOG from '../data/chat_log.json'
 import DEFAULT_USERS from '../data/users.json';
 
 function App(props) {
-  const [messageStateArray, setMessageStateArray] = useState(INITIAL_CHAT_LOG);
+  const [messageStateArray, setMessageStateArray] = useState([]);
   const [currentUser, setCurrentUser] = useState(DEFAULT_USERS[0]) //initialize;
 
   const navigateTo = useNavigate(); //navigation hook
+
+
+  useEffect(() => {
+    const db = getDatabase();
+    const messageRef = ref(db, 'allMessages');
+
+    // addEventListener('database Change', () => {})
+    onValue(messageRef, (snapshot) => {
+      console.log("database changed!");
+      const allMessageObj = snapshot.val();
+      const keyArray = Object.keys(allMessageObj);
+      const allMessageArray = keyArray.map((key) => {
+        const transformed = allMessageObj[key];
+        transformed.firebaseKey = key;
+        return transformed;
+      })
+
+      console.log(allMessageArray);
+
+      setMessageStateArray(allMessageArray)
+
+    })
+
+
+  }, [])
+
 
   //effect to run when the component first loads!
   useEffect(() => {
@@ -41,8 +69,16 @@ function App(props) {
       "timestamp": Date.now(),
       "channel": channel
     }
-    const newMessageArray = [...messageStateArray, newMessageObj];
-    setMessageStateArray(newMessageArray); //update state & rerender
+    // const newMessageArray = [...messageStateArray, newMessageObj];
+    // setMessageStateArray(newMessageArray); //update state & rerender
+
+    //put the message into Firebase DB
+    const db = getDatabase();
+    const messageRef = ref(db, 'allMessages');
+
+    //          where to put, what to put
+    //firebaseSet(messageRef, newMessageObj);
+    firebasePush(messageRef, newMessageObj);
   }
 
   return (
