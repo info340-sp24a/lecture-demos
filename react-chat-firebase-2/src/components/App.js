@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import { Routes, Route, Outlet, Navigate, useNavigate } from 'react-router-dom';
 import { getDatabase, ref, push as firebasePush, onValue } from 'firebase/database'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 import { HeaderBar } from './HeaderBar.js';
 import ChatPage from './ChatPage';
@@ -21,7 +22,25 @@ function App(props) {
   //effect to run when the component first loads
   useEffect(() => {
     //log in a default user
-    changeUser(DEFAULT_USERS[1])
+    // changeUser(DEFAULT_USERS[1])
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (firebaseUserObj) => {
+      // console.log("auth state changed")
+      // console.log(firebaseUserObj);
+
+      if(firebaseUserObj != null){ //user signed in
+        firebaseUserObj.userId = firebaseUserObj.uid;
+        firebaseUserObj.userName = firebaseUserObj.displayName;
+        firebaseUserObj.userImg = firebaseUserObj.photoURL || "/img/null.png";
+        setCurrentUser(firebaseUserObj);  
+      }
+      else { //is null, user signed out
+        setCurrentUser(DEFAULT_USERS[0]);
+      }
+    })
+
+
   }, []) //array is list of variables that will cause this to rerun if changed
 
   //effect to run when the component first loads
@@ -104,8 +123,8 @@ function App(props) {
 function ProtectedPage(props) {
   //...determine if user is logged in
   if(props.currentUser.userId === null) { //not undefined
-    return <p>Sign in to view.</p>
-    // return <Navigate to="/signin"/>
+    // return <p>Sign in to view.</p>
+    return <Navigate to="/signin"/>
   }
   else { //otherwise, show the child route content
     return <Outlet />
